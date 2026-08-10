@@ -1,0 +1,50 @@
+{
+  "name": "@prb/vite-template",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Vite template for building React web applications.",
+  "type": "module",
+  "scripts": {
+    "build": "vite build",
+    "dev": "vite",
+    "lint": "biome check . && eslint .",
+    "prepare": "husky",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@base-ui/react": "^1.6.0",
+    "effect": "^3.22.0",
+    "lucide-react": "^1.28.0",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "tailwind-merge": "^3.6.0",
+    "tailwind-variants": "^3.3.0",
+    "tailwindcss": "^4.3.3"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.5.5",
+    "@prb/devkit": "^1.0.2",
+    "@rolldown/plugin-babel": "^0.2.3",
+    "@tailwindcss/vite": "^4.3.3",
+    "@types/node": "^26.1.1",
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.4",
+    "@typescript-eslint/parser": "^8.65.0",
+    "@vitejs/plugin-react": "^6.0.5",
+    "babel-plugin-react-compiler": "^1.0.0",
+    "eslint": "^10.8.0",
+    "eslint-plugin-better-tailwindcss": "^4.7.0",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "husky": "^9.1.7",
+    "lint-staged": "^17.1.1",
+    "prettier": "^3.9.6",
+    "react-grab": "^0.1.50",
+    "typescript": "^5.9.3",
+    "ultracite": "^7.9.4",
+    "vite": "^8.2.0",
+    "vitest": "^4.1.10"
+  },
+  "packageManager": "bun@1.3.14"
+}

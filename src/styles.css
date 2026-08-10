@@ -1,0 +1,211 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-amber: var(--amber);
+  --color-amber-ink: var(--amber-ink);
+  --color-canvas: var(--canvas);
+  --color-canvas-deep: var(--canvas-deep);
+  --color-danger: var(--danger);
+  --color-focus: var(--focus);
+  --color-ink: var(--ink);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-muted: var(--muted);
+  --color-paper: var(--paper);
+  --color-success: var(--success);
+  --color-violet: var(--violet);
+  --color-violet-ink: var(--violet-ink);
+  --color-violet-soft: var(--violet-soft);
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  --shadow-graph: 0 24px 64px color-mix(in oklab, var(--ink) 20%, transparent);
+  --z-modal: 50;
+}
+
+:root {
+  --amber: #d99743;
+  --amber-ink: #8d4c14;
+  --canvas: #f3efe5;
+  --canvas-deep: #e7dfd0;
+  --danger: #b3443c;
+  --focus: #6741af;
+  --ink: #252324;
+  --line: rgb(37 35 36 / 15%);
+  --line-strong: rgb(37 35 36 / 28%);
+  --muted: #6b6769;
+  --paper: #fbf8f1;
+  --success: #257564;
+  --violet: #6c4aac;
+  --violet-ink: #513486;
+  --violet-soft: #ece4f6;
+  color-scheme: light dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --amber: #e8ad63;
+    --amber-ink: #f3c98e;
+    --canvas: #171719;
+    --canvas-deep: #242126;
+    --danger: #ed8d83;
+    --focus: #bc9bf0;
+    --ink: #eee8e6;
+    --line: rgb(238 232 230 / 15%);
+    --line-strong: rgb(238 232 230 / 28%);
+    --muted: #b7afb1;
+    --paper: #201f22;
+    --success: #83cdb9;
+    --violet: #a98ae0;
+    --violet-ink: #c7b1ed;
+    --violet-soft: #30283d;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: var(--ink);
+  background: var(--canvas);
+  text-rendering: optimizeLegibility;
+}
+
+@layer base {
+  button,
+  input {
+    font: inherit;
+    color: inherit;
+  }
+}
+
+::selection {
+  color: var(--violet-ink);
+  background: var(--violet-soft);
+}
+
+[data-graph="frame"] {
+  position: relative;
+  min-height: 22rem;
+  overflow: hidden;
+  background-color: var(--paper);
+  background-image:
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 2rem 2rem;
+  border: 1px solid var(--line-strong);
+}
+
+[data-graph="lines"] {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke: var(--line-strong);
+  stroke-width: 1.4;
+  vector-effect: non-scaling-stroke;
+}
+
+[data-graph-node] {
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.5rem;
+  padding: 0.5rem 0.7rem;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  background: var(--canvas);
+  border: 1px solid var(--line-strong);
+  box-shadow: 5px 5px 0 var(--canvas-deep);
+}
+
+[data-graph-node="compiler"] {
+  top: 12%;
+  left: 8%;
+  border-color: var(--amber);
+}
+
+[data-graph-node="styles"] {
+  top: 16%;
+  right: 8%;
+  border-color: var(--violet);
+}
+
+[data-graph-node="schema"] {
+  bottom: 14%;
+  left: 24%;
+  border-color: var(--amber);
+}
+
+[data-graph-node="runtime"] {
+  right: 13%;
+  bottom: 9%;
+  border-color: var(--violet);
+}
+
+[data-graph-pulse] {
+  position: absolute;
+  display: block;
+  width: 0.7rem;
+  height: 0.7rem;
+  background: var(--amber);
+  border: 2px solid var(--canvas);
+  border-radius: 999px;
+  box-shadow: 0 0 0 2px var(--amber);
+  animation: graph-signal 3.8s ease-in-out infinite;
+}
+
+[data-graph-pulse="one"] {
+  top: 39%;
+  left: 46%;
+}
+
+[data-graph-pulse="two"] {
+  right: 36%;
+  bottom: 31%;
+  background: var(--violet);
+  box-shadow: 0 0 0 2px var(--violet);
+  animation-delay: -1.8s;
+}
+
+[data-graph="caption"] {
+  position: absolute;
+  right: 1rem;
+  bottom: 0.9rem;
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  color: var(--muted);
+  letter-spacing: 0.06em;
+}
+
+@keyframes graph-signal {
+  0%,
+  100% {
+    transform: scale(0.82);
+  }
+
+  45% {
+    transform: scale(1.35);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
