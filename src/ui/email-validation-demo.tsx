@@ -1,4 +1,4 @@
-import { Effect, Either } from "effect";
+import { Result } from "effect";
 import { Check, Mail, TriangleAlert } from "lucide-react";
 import type { FormEvent } from "react";
 import { useState } from "react";
@@ -18,10 +18,10 @@ export function EmailValidationDemo() {
     event.preventDefault();
     const form = new FormData(event.currentTarget);
     const input: unknown = { email: form.get("email") };
-    const result = Effect.runSync(Effect.either(decodeEmail(input)));
+    const result = decodeEmail(input);
 
-    if (Either.isRight(result)) {
-      setState({ email: result.right.email, status: "success" });
+    if (Result.isSuccess(result)) {
+      setState({ email: result.success.email, status: "success" });
     } else {
       setState({
         message: "Enter an email without spaces, using name@example.com.",
