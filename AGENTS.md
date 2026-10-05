@@ -33,8 +33,10 @@ References: [project overview](./README.md), [dependencies and scripts](./packag
 - Compose interactive primitives from `@base-ui/react`, style their parts with Tailwind, and preserve visible focus. Use
   Base UI `render` composition and set `nativeButton={false}` for button-styled links; use `data-[starting-style]` and
   `data-[ending-style]` for transitions.
-
-- Build CSS class values from complete tokens; ESLint rejects interpolation and concatenation in class expressions.
+- Write every class value as a static string of complete Tailwind tokens. Never build one with a template literal or
+  concatenation (`` `h-1 ${extra}` ``, `"text-" + tone`), even when every piece is a full token: express variants and
+  overrides with `tailwind-variants` (`tv`), or choose between complete literals with a ternary.
+  `local/no-classname-concatenation` enforces this in ESLint.
 
 ## Tooling
 
