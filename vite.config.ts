@@ -10,6 +10,8 @@ const localServer = { host: "127.0.0.1", port: 5173, strictPort: true };
 export default defineConfig({
   plugins: [react(), babel({ presets: [reactCompilerPreset()] }), tailwindcss()],
   build: {
+    // Bundle size is not a concern for these apps, so never warn about it.
+    chunkSizeWarningLimit: Infinity,
     emptyOutDir: true,
     outDir: "dist",
   },
