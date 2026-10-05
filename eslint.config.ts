@@ -4,6 +4,8 @@ import betterTailwindcss from "eslint-plugin-better-tailwindcss";
 import { getDefaultSelectors } from "eslint-plugin-better-tailwindcss/api/defaults";
 import reactHooks from "eslint-plugin-react-hooks";
 
+import classNamesPlugin from "./scripts/eslint-class-names.js";
+
 const languageOptions: Linter.LanguageOptions = {
   ecmaVersion: "latest",
   parser: tsParser,
@@ -38,8 +40,9 @@ const config: Linter.Config[] = [
   {
     files: ["**/*.{ts,tsx}"],
     languageOptions,
-    plugins: { "react-hooks": reactHooks as unknown as ESLint.Plugin },
+    plugins: { local: classNamesPlugin, "react-hooks": reactHooks as unknown as ESLint.Plugin },
     rules: {
+      "local/no-classname-concatenation": "error",
       "react-hooks/exhaustive-deps": "error",
       "react-hooks/rules-of-hooks": "error",
     },

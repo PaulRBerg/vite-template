@@ -2,7 +2,7 @@ import { Schema } from "effect";
 
 export const EmailSchema = Schema.Struct({
   email: Schema.String.pipe(
-    Schema.pattern(/^[^\s@]+@[^\s@]+\.[^\s@]+$/, {
+    Schema.pattern(/^[^\s@]+@[^\s@]+\.[^\s@]+$/u, {
       message: () => "Enter a valid email address.",
     })
   ),

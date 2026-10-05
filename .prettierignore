@@ -1,12 +1,7 @@
 # directories
 .husky/
 .serena/
+.ai/
+.cache/
 dist/
 node_modules/
-
-# files
-**/*.css
-**/*.js
-**/*.jsx
-**/*.ts
-**/*.tsx

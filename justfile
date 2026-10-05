@@ -1,30 +1,81 @@
-import "./node_modules/@prb/devkit/just/base.just"
+import "./node_modules/@prb/devkit/just/settings.just"
 
 na := require("na")
 
 default:
-    just --list
+    @just --list
+
+@install *args:
+    ni {{ args }}
 
 clean:
-    nlx del-cli ".DS_Store" "dist"
+    nlx del-cli ".DS_Store" "dist" ".cache"
 
 @build:
-    bun vite build
+    na vite build
 
+[positional-arguments]
 @dev *args:
-    bun vite {{ args }}
+    na vite "$@"
 
+[positional-arguments]
 @preview *args:
-    bun vite preview {{ args }}
+    na vite preview "$@"
+
+# Check code with Oxlint and Oxfmt.
+[group("checks")]
+[positional-arguments]
+@ox-check +paths=".":
+    na oxlint --format agent --config oxlint.config.ts --no-error-on-unmatched-pattern "$@"
+    na oxfmt --check --config oxfmt.config.ts --no-error-on-unmatched-pattern "$@"
+alias oc := ox-check
+
+# Apply safe lint fixes, remove unused imports, and format code.
+[group("checks")]
+[positional-arguments]
+@ox-write +paths=".":
+    na oxlint --fix --format agent --config oxlint.config.ts --no-error-on-unmatched-pattern "$@"
+    na oxlint --fix-suggestions -A all -D no-unused-vars --format agent --config oxlint.config.ts --no-error-on-unmatched-pattern "$@"
+    na oxfmt --write --config oxfmt.config.ts --no-error-on-unmatched-pattern "$@"
+alias ow := ox-write
 
 [group("checks")]
+[positional-arguments]
 @eslint-check +paths=".":
-    na eslint --cache --cache-location node_modules/.cache/eslint/.eslintcache {{ paths }}
+    na eslint --cache --cache-location node_modules/.cache/eslint/.eslintcache "$@"
 
 [group("checks")]
+[positional-arguments]
 @eslint-write +paths=".":
-    na eslint --cache --cache-location node_modules/.cache/eslint/.eslintcache --fix {{ paths }}
+    na eslint --cache --cache-location node_modules/.cache/eslint/.eslintcache --fix "$@"
 
 [group("checks")]
+[positional-arguments]
+@prettier-check +paths="**/*.{md,mdx,yaml,yml}":
+    na prettier --check --cache --cache-location .cache/prettier/.prettier-cache --no-error-on-unmatched-pattern "$@"
+
+[group("checks")]
+[positional-arguments]
+@prettier-write +paths="**/*.{md,mdx,yaml,yml}":
+    na prettier --write --cache --cache-location .cache/prettier/.prettier-cache --no-error-on-unmatched-pattern "$@"
+
+[group("checks")]
+@tsc-check:
+    na tsc --noEmit
+alias type-check := tsc-check
+alias tc := tsc-check
+
+[group("checks")]
+[positional-arguments]
 @test *args:
-    bun vitest run {{ args }}
+    na vitest run "$@"
+
+[group("checks")]
+[positional-arguments]
+@test-agent *args:
+    na vitest run --reporter=agent "$@"
+
+# Run the complete lint, formatting, type, test, and build checks.
+[group("checks")]
+@full-check: ox-check eslint-check prettier-check tsc-check test build
+alias fc := full-check

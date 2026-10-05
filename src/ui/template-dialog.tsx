@@ -1,7 +1,7 @@
 import { Dialog } from "@base-ui/react/dialog";
 import { Braces, X } from "lucide-react";
 
-import { Button } from "@/ui/Button.js";
+import { Button } from "@/ui/button.js";
 
 const SIGNALS = [
   "Vite 8, React 19, and TypeScript",

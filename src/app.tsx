@@ -1,8 +1,8 @@
 import { ArrowDownRight, ArrowUpRight, Blocks, CodeXml, Palette, Zap } from "lucide-react";
 
-import { Button } from "@/ui/Button.js";
-import { EmailValidationDemo } from "@/ui/EmailValidationDemo.js";
-import { TemplateDialog } from "@/ui/TemplateDialog.js";
+import { Button } from "@/ui/button.js";
+import { EmailValidationDemo } from "@/ui/email-validation-demo.js";
+import { TemplateDialog } from "@/ui/template-dialog.js";
 
 const STACK_NODES = [
   { detail: "Fast local feedback", icon: Zap, name: "compiler", tone: "amber" },
@@ -80,15 +80,13 @@ export function App() {
               graph—not a black box behind a landing page.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <Button asChild size="lg">
-                <a href="#validation">
-                  Edit the boundary <ArrowDownRight className="size-4" strokeWidth={1.8} />
-                </a>
+              <Button nativeButton={false} render={<a href="#validation" />} size="lg">
+                Edit the boundary <ArrowDownRight className="size-4" strokeWidth={1.8} />
               </Button>
               <TemplateDialog />
             </div>
             <p className="mt-8 font-mono text-xs/5 text-muted">
-              src/App.tsx <span aria-hidden="true">→</span> instant feedback
+              src/app.tsx <span aria-hidden="true">→</span> instant feedback
             </p>
           </div>
           <div className="border-t border-line px-5 py-10 sm:px-8 lg:border-t-0 lg:border-l lg:px-10 lg:py-12 xl:px-12">

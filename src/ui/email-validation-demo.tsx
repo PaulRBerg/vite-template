@@ -4,7 +4,7 @@ import type { FormEvent } from "react";
 import { useState } from "react";
 
 import { decodeEmail } from "@/lib/email.js";
-import { Button } from "@/ui/Button.js";
+import { Button } from "@/ui/button.js";
 
 type ValidationState =
   | { email: string; status: "success" }
@@ -78,7 +78,7 @@ export function EmailValidationDemo() {
         <Button className="justify-self-start" type="submit" variant="primary">
           Validate locally
         </Button>
-        {state.status === "error" && (
+        {state.status === "error" ? (
           <p className="flex items-start gap-2 text-sm/6 text-danger" id={messageId} role="alert">
             <TriangleAlert
               aria-hidden="true"
@@ -87,13 +87,13 @@ export function EmailValidationDemo() {
             />
             {state.message}
           </p>
-        )}
-        {state.status === "success" && (
+        ) : null}
+        {state.status === "success" ? (
           <p className="flex items-start gap-2 text-sm/6 text-success" id={messageId} role="status">
             <Check aria-hidden="true" className="mt-0.5 size-4 shrink-0" strokeWidth={2} />
             Decoded: <span className="font-mono">{state.email}</span>
           </p>
-        )}
+        ) : null}
       </form>
     </section>
   );

@@ -5,12 +5,12 @@
 [react]: https://react.dev/
 [react-badge]: https://img.shields.io/badge/React-19-087EA4?logo=react&logoColor=white
 [typescript]: https://www.typescriptlang.org/
-[typescript-badge]: https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript&logoColor=white
+[typescript-badge]: https://img.shields.io/badge/TypeScript-7-3178C6?logo=typescript&logoColor=white
 [license]: ./LICENSE.MD
 [license-badge]: https://img.shields.io/badge/License-MIT-orange.svg
 
 A production-ready static Vite template for React 19 and TypeScript, with React Compiler, Tailwind CSS v4, Base UI,
-Effect, and a focused component showcase.
+Effect, React Router, and a focused component showcase.
 
 ## Use this template
 
@@ -41,24 +41,29 @@ just --list
 | `just preview` | Serve an existing production build locally. |
 | `just clean`   | Remove build artifacts.                     |
 
+Development and preview both use `http://127.0.0.1:5173` and fail if the port is occupied. React Grab is available in
+development with `Meta+G`.
+
 The equivalent package scripts are `bun run dev`, `bun run build`, and `bun run preview`.
 
 ### Quality and tests
 
 | Command                          | Purpose                                           |
 | -------------------------------- | ------------------------------------------------- |
-| `just biome-check <paths...>`    | Check supported source formatting and lint rules. |
-| `just biome-write <paths...>`    | Apply supported source formatting and lint fixes. |
-| `just eslint-check <paths...>`   | Check React hooks and Tailwind usage.             |
+| `just ox-check <paths...>`       | Check supported source formatting and lint rules. |
+| `just ox-write <paths...>`       | Apply supported source formatting and lint fixes. |
+| `just eslint-check <paths...>`   | Check React hooks and complete Tailwind tokens.   |
 | `just eslint-write <paths...>`   | Apply ESLint fixes.                               |
 | `just prettier-check <paths...>` | Check Markdown and YAML formatting.               |
 | `just prettier-write <paths...>` | Format Markdown and YAML.                         |
-| `just type-check`                | Type-check the project.                           |
+| `just tsc-check`                 | Type-check the project.                           |
 | `just test`                      | Run the Vitest suite.                             |
-| `just full-check`                | Run Biome, Prettier, and TypeScript checks.       |
+| `just full-check`                | Run lint, formatting, types, tests, and build.    |
 
-`bun run test` runs the test script. See [`AGENTS.md`](./AGENTS.md) for source conventions and the required validation
-order when contributing.
+`bun run test` runs the test script; `just test-agent` uses concise agent output. Code formatting and linting use
+Oxlint/Oxfmt, with ESLint for React hooks and Tailwind classes. Type checking uses TypeScript 7, while ESLint uses the
+TypeScript 6 compatibility API. See [`AGENTS.md`](./AGENTS.md) for source conventions and the required validation order
+when contributing.
 
 ## Structure and customization
 
@@ -67,8 +72,9 @@ validation are intentionally small examples rather than an application architect
 place reusable UI in `src/ui/` and shared non-UI helpers in `src/lib/`.
 
 Customize the visual system in `src/styles.css`, compose accessible interactions from Base UI primitives, and extend the
-showcase from `src/App.tsx`. This is a static client application: it does not provide routing, a backend, runtime
-environment configuration, or generated media.
+showcase from `src/app.tsx`. The client mounts through React Router with a catch-all route and a styled error boundary
+with a reload action. Add routes in `src/main.tsx`; production hosting must serve `index.html` for client routes. The
+template has no backend or runtime environment configuration.
 
 ## License
 
