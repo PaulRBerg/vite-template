@@ -15,7 +15,7 @@ import "@/styles.css";
 
 const root = document.querySelector("#root");
 if (!(root instanceof HTMLElement)) {
-  throw new Error("The Vite template root element is missing.");
+  throw new TypeError("The Vite template root element is missing.");
 }
 
 const router = createBrowserRouter([
