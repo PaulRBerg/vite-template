@@ -13,8 +13,8 @@ const SIGNALS = [
 export function TemplateDialog() {
   return (
     <Dialog.Root>
-      <Dialog.Trigger className="inline-flex min-h-10 cursor-pointer items-center gap-2 border border-line-strong px-4 text-sm font-semibold text-ink transition-colors hover:border-violet hover:bg-violet-soft focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus">
-        <Braces className="size-4" strokeWidth={1.8} />
+      <Dialog.Trigger render={<Button variant="secondary" />}>
+        <Braces aria-hidden="true" className="size-4" strokeWidth={1.8} />
         Inspect the signal
       </Dialog.Trigger>
       <Dialog.Portal>
@@ -29,9 +29,11 @@ export function TemplateDialog() {
                 A small graph with useful edges.
               </Dialog.Title>
             </div>
-            <Dialog.Close className="grid size-9 shrink-0 cursor-pointer place-items-center border border-line text-muted transition-colors hover:border-violet hover:bg-violet-soft hover:text-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus">
-              <X className="size-4" strokeWidth={1.8} />
-              <span className="sr-only">Close dialog</span>
+            <Dialog.Close
+              aria-label="Close dialog"
+              render={<Button size="icon" variant="secondary" />}
+            >
+              <X aria-hidden="true" className="size-4" strokeWidth={1.8} />
             </Dialog.Close>
           </div>
           <Dialog.Description className="text-sm/6 text-muted">

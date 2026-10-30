@@ -72,9 +72,20 @@ validation are intentionally small examples rather than an application architect
 place reusable UI in `src/ui/` and shared non-UI helpers in `src/lib/`.
 
 Customize the visual system in `src/styles.css`, compose accessible interactions from Base UI primitives, and extend the
-showcase from `src/app.tsx`. The client mounts through React Router with a catch-all route and a styled error boundary
-with a reload action. Add routes in `src/main.tsx`; production hosting must serve `index.html` for client routes. The
-template has no backend or runtime environment configuration.
+showcase from `src/app.tsx`. Interactive controls use `accent`, `accent-hover`, `accent-foreground`, `accent-ink`, and
+`accent-soft` tokens. Sans, display, and mono font roles let you change typography without rewriting components. The
+defaults retain the showcase's violet palette and system fonts. `Button` includes a square `icon` size, demonstrated by
+the theme controls and dialog close action.
+
+The optional `ThemeControl` offers System, Light, and Dark. `src/lib/theme.ts` validates and stores the choice under
+`vite-template.theme`, synchronizes it across tabs, and applies it before React mounts. Storage failures leave the
+current session usable. CSS `color-scheme` and `light-dark()` follow live OS changes in System mode. Customize the
+storage key for each application. The theme tests use the existing Node Vitest environment.
+
+The client mounts through React Router with a catch-all route and a styled error boundary with a reload action. Add
+routes in `src/main.tsx`; production hosting must serve `index.html` for client routes. Theme initialization sits
+outside the router, so error recovery retains the selected appearance. The template has no backend or runtime
+environment configuration.
 
 ## License
 

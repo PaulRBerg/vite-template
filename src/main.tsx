@@ -10,8 +10,12 @@ import { RouterProvider } from "react-router/dom";
 
 import { AppErrorBoundary } from "@/app-error-boundary.js";
 import { App } from "@/app.js";
+import { initializeTheme } from "@/lib/theme.js";
 
 import "@/styles.css";
+
+const cleanupTheme = initializeTheme();
+import.meta.hot?.dispose(cleanupTheme);
 
 const root = document.querySelector("#root");
 if (!(root instanceof HTMLElement)) {

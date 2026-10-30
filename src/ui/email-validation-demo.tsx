@@ -66,7 +66,7 @@ export function EmailValidationDemo() {
               aria-describedby={state.status === "idle" ? undefined : messageId}
               aria-invalid={state.status === "error"}
               autoComplete="email"
-              className="min-h-11 w-full border border-line-strong bg-canvas py-2 pr-3 pl-10 text-base transition-colors outline-none placeholder:text-muted focus:border-violet focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus"
+              className="min-h-11 w-full border border-line-strong bg-canvas py-2 pr-3 pl-10 text-base transition-colors outline-none placeholder:text-muted focus:border-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus"
               id="email"
               inputMode="email"
               name="email"

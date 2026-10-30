@@ -3,6 +3,7 @@ import { ArrowDownRight, ArrowUpRight, Blocks, CodeXml, Palette, Zap } from "luc
 import { Button } from "@/ui/button.js";
 import { EmailValidationDemo } from "@/ui/email-validation-demo.js";
 import { TemplateDialog } from "@/ui/template-dialog.js";
+import { ThemeControl } from "@/ui/theme-control.js";
 
 const STACK_NODES = [
   { detail: "Fast local feedback", icon: Zap, name: "compiler", tone: "amber" },
@@ -41,7 +42,7 @@ export function App() {
   return (
     <main className="min-h-dvh overflow-hidden bg-canvas text-ink">
       <div className="mx-auto grid max-w-7xl border-x border-line">
-        <header className="flex min-h-16 items-center justify-between gap-4 border-b border-line px-5 py-3 sm:px-8">
+        <header className="flex min-h-16 flex-wrap items-center justify-between gap-4 border-b border-line px-5 py-3 sm:px-8">
           <a
             className="group flex items-center gap-3 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-focus"
             href="#top"
@@ -56,12 +57,15 @@ export function App() {
               Vite template
             </span>
           </a>
-          <a
-            className="hidden items-center gap-2 text-sm font-semibold text-muted transition-colors hover:text-ink focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-focus sm:inline-flex"
-            href="#validation"
-          >
-            Try the boundary <ArrowDownRight className="size-4" strokeWidth={1.8} />
-          </a>
+          <div className="flex items-center gap-4">
+            <a
+              className="hidden items-center gap-2 text-sm font-semibold text-muted transition-colors hover:text-accent-ink focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-focus md:inline-flex"
+              href="#validation"
+            >
+              Try the boundary <ArrowDownRight className="size-4" strokeWidth={1.8} />
+            </a>
+            <ThemeControl />
+          </div>
         </header>
 
         <section
@@ -134,7 +138,7 @@ export function App() {
             public template · client-first · no runtime configuration
           </p>
           <a
-            className="inline-flex items-center gap-2 text-sm font-semibold text-violet-ink hover:text-ink focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-focus"
+            className="inline-flex items-center gap-2 text-sm font-semibold text-accent-ink hover:text-ink focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-focus"
             href="#top"
           >
             Back to source <ArrowUpRight className="size-4" strokeWidth={1.8} />

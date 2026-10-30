@@ -11,14 +11,15 @@ const buttonStyles = tv({
   },
   variants: {
     size: {
+      icon: "size-10 shrink-0 p-0",
       lg: "min-h-12 px-5 text-base",
       md: "min-h-10 px-4 text-sm",
       sm: "min-h-8 px-3 text-xs",
     },
     variant: {
       ghost: "text-ink hover:bg-ink/6",
-      primary: "bg-violet text-canvas shadow-xs hover:bg-violet-ink",
-      secondary: "border border-line-strong text-ink hover:border-violet hover:bg-violet-soft",
+      primary: "bg-accent text-accent-foreground shadow-xs hover:bg-accent-hover",
+      secondary: "border border-line-strong text-ink hover:border-accent hover:bg-accent-soft",
     },
   },
 });

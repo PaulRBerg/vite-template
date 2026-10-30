@@ -30,9 +30,14 @@ References: [project overview](./README.md), [dependencies and scripts](./packag
   and local. Do not let parser-shaped `unknown` leak through UI or domain APIs.
 - Use Tailwind v4 tokens and the established spacing/color system before arbitrary values. Express real component
   variants with `tailwind-variants`. Keep global tokens and graph-specific CSS in `src/styles.css`.
+- Use `accent*` tokens for interactive controls and `font-sans`/`font-display` for typography. Keep element defaults in
+  `@layer base` so utilities can override them. Preserve the browser's root font size.
+- Keep theme initialization in `src/main.tsx` before React mounts. Reuse `src/lib/use-theme.ts` and
+  `src/ui/theme-control.tsx` for preference controls. Semantic color tokens follow the selected appearance.
 - Compose interactive primitives from `@base-ui/react`. Style their parts with Tailwind. Preserve visible focus. Use
   Base UI `render` composition and set `nativeButton={false}` for button-styled links. Use `data-[starting-style]` and
   `data-[ending-style]` for transitions.
+- Reuse `Button` with `size="icon"` for square icon controls. Give each icon-only control an accessible name.
 - Write every class value as a static string of complete Tailwind tokens. Never build one with a template literal or
   concatenation (`` `h-1 ${extra}` ``, `"text-" + tone`), even when every piece is a full token. Express variants and
   overrides with `tailwind-variants` (`tv`), or choose between complete literals with a ternary.
